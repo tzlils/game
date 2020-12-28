@@ -3,12 +3,12 @@
 #include <Rendering/LineRenderer.h>
 
 Player::Player() {
-    textures.insert(std::make_pair("idle", loadTextureFromFile("assets/idle.png", true)));
-    textures.insert(std::make_pair("crouch", loadTextureFromFile("assets/crouch.png", true)));
-    textures.insert(std::make_pair("moving", loadTextureFromFile("assets/moving.png", true)));
-    textures.insert(std::make_pair("looking_up", loadTextureFromFile("assets/looking_up.png", true)));
-    textures.insert(std::make_pair("jump", loadTextureFromFile("assets/jump.png", true)));
-    textures.insert(std::make_pair("fall", loadTextureFromFile("assets/fall.png", true)));
+    // textures.insert(std::make_pair("idle", loadTextureFromFile("assets/idle.png", true)));
+    // textures.insert(std::make_pair("crouch", loadTextureFromFile("assets/crouch.png", true)));
+    // textures.insert(std::make_pair("moving", loadTextureFromFile("assets/moving.png", true)));
+    // textures.insert(std::make_pair("looking_up", loadTextureFromFile("assets/looking_up.png", true)));
+    // textures.insert(std::make_pair("jump", loadTextureFromFile("assets/jump.png", true)));
+    // textures.insert(std::make_pair("fall", loadTextureFromFile("assets/fall.png", true)));
     current = textures["idle"];
     position = glm::vec2(0.0f);
     velocity = glm::vec2(0.0f);

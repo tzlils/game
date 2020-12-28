@@ -4,8 +4,8 @@
 #include <Game.h>
 #include <Main.h>
 
-#define WIDTH 500
-#define HEIGHT 500
+#define WIDTH 1920
+#define HEIGHT 1080
 
 GLFWwindow* window;
 float x, y;

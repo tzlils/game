@@ -1,7 +1,8 @@
 #pragma once
 #include <Resources/Texture2D.h>
+#include <Resources/Font.h>
+
 #include <Rendering/SpriteRenderer.h>
-#include <Rendering/TextRenderer.h>
 // #include <Resources/ResourceManager.h>
 #include <GLFW/glfw3.h>
 #include <Sound/SoundPlayer.h>
@@ -29,8 +30,11 @@ class Game {
         double deltaTime;
         double lastFrame;
         SpriteRenderer* renderer;
-        TextRenderer* trenderer;
+
+
         ShaderProgram shader;
+        
+        Font defaultFont;
         Texture2D bg;
         Texture2D grass;
         Texture2D dirt;

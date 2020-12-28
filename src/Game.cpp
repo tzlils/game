@@ -39,24 +39,24 @@ void Game::Init() {
     /*
         Prepare Text Shader
     */
-    ShaderProgram textShader = ShaderProgram("assets/text.vs", "assets/text.fs");
-    textShader.bind();
-    textShader.setMat4("projection", projection);
-    textShader.setInt("text", 0);
-    trenderer = new TextRenderer(width, height);
+    // ShaderProgram textShader = ShaderProgram("assets/text.vs", "assets/text.fs");
+    // textShader.bind();
+    // textShader.setMat4("projection", projection);
+    // textShader.setInt("text", 0);
+    // trenderer = new TextRenderer(width, height);
 
     /*
         *Prepare Text Renderer and load in font (assets/Super-Mario-World.tff)
     */
-    trenderer->TextShader = textShader;
-    trenderer->Load("assets/SMW Text NC.ttf", 48);
+    // trenderer->TextShader = textShader;
+    defaultFont = Text::loadFromFile("assets/SMW Text NC.ttf", 48);
 
     /*
         *Loads some textures for drawing layer 1
     */
-    bg = loadTextureFromFile("assets/background.png", true);
-    grass = loadTextureFromFile("assets/grass.png", true);
-    dirt = loadTextureFromFile("assets/dirt.png", true);
+    bg = Texture::loadFromFile("assets/background.png", true);
+    grass = Texture::loadFromFile("assets/grass.png", true);
+    dirt = Texture::loadFromFile("assets/dirt.png", true);
     resizeFrames = 0;
 
     // objIndex = 0;
@@ -109,7 +109,7 @@ void Game::ProcessInput(GLFWwindow* window) {
     }
     if(keyPlus && resizeFrames <= 0) {
         // player.position.y -= TILEHEIGHT*TILEMUL;
-        // TILEMUL += 1;
+        TILEMUL += 1;
         // resizeFrames = 50;
     }
     if(keyMinus && resizeFrames <= 0) {
@@ -163,7 +163,7 @@ void Game::Render() {
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
 
-    renderer->DrawSprite(bg, glm::vec2(0, 0), glm::vec2(width, height), 0.0f);
+    renderer->DrawSprite(bg, glm::vec2(0, 0), glm::vec2(1920, 1080), 0.0f);
     // renderer->DrawSprite(dirt, glm::vec2(width/2, height/2), glm::vec2(50, 50), 0.0f);    
     // for (int i = 0; i < objIndex; i++) {
     //     objects[i].Draw(renderer);
@@ -190,9 +190,13 @@ void Game::Render() {
     // xvelocity << "XVEL: " << player.velocity.x;
     // trenderer->RenderText(xvelocity.str(), 20, 40, 0.5f, glm::vec3(0.0f));
 
-    std::stringstream fps;
-    fps << "FPS: " << (unsigned int)round(1 / deltaTime);
-    trenderer->RenderText(fps.str(), height, width, 2.0f, glm::vec3(0.0f));
+    // std::stringstream fps;
+    // fps << "FPS: " << (unsigned int)round(1 / deltaTime);
+    // trenderer->RenderText(fps.str(), height, width, 2.0f, glm::vec3(0.0f));
+
+    std::stringstream txt;
+    txt << "Hello World";
+    Text::Render(defaultFont, txt.str(), 1, 1, 1.0f, glm::vec3(0.0f));
 
     // player.Draw(renderer);
     // drawLine(shader, player.position+(player.size*glm::vec2(0.5f, 0.5f)), player.velocity*15.5f);

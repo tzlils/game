@@ -6,12 +6,12 @@ GameObject::GameObject() {
 }
 
 GameObject::GameObject(glm::vec2 pos, glm::vec2 size, Texture2D sprite, glm::vec3 color, glm::vec2 velocity) {
-    this->position = pos;
-    this->size = size;
-    this->sprite = sprite;
-    this->color = color;
-    this->velocity = velocity;
-    this->isStatic = false;
+    // this->position = pos;
+    // this->size = size;
+    // this->sprite = sprite;
+    // this->color = color;
+    // this->velocity = velocity;
+    // this->isStatic = false;
 }
 
 void GameObject::Draw(SpriteRenderer* renderer) {
