@@ -1,8 +1,6 @@
 #include <Game/Player.h>
 #include <Resources/Texture2D.h>
-#include <Game.h>
 #include <Rendering/LineRenderer.h>
-#include <Main.h>
 
 Player::Player() {
     textures.insert(std::make_pair("idle", loadTextureFromFile("assets/idle.png", true)));
@@ -31,7 +29,7 @@ void Player::Jump() {
 void Player::Update() {
 
     //Apply friction
-    if(abs(velocity.x) < 0.05) velocity.x = 0;
+    if(std::abs(velocity.x) < 0.05) velocity.x = 0;
     else velocity.x *= HFRICTION;
     // if(abs(velocity.y) < 0.05) velocity.y = 0;
     // else velocity.y *= FRICTION;

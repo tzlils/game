@@ -4,6 +4,9 @@
 #include <Game.h>
 #include <Main.h>
 
+#define WIDTH 500
+#define HEIGHT 500
+
 GLFWwindow* window;
 float x, y;
 
@@ -13,7 +16,7 @@ void initGL() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(500, 500, "TCraft", NULL, NULL);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "TCraft", NULL, NULL);
     if(window == NULL) {
         printf("Error");
         glfwTerminate();
@@ -27,14 +30,14 @@ void initGL() {
 
 int main() {
     initGL();
-    glViewport(0, 0, 1920, 1080);
+    glViewport(0, 0, WIDTH, HEIGHT);
     glClearColor(0.37f, 0.71f, 1.0f, 1.0f);
     glEnable(GL_BLEND);
     // glfwSwapInterval(0);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
-    game = new Game(1920, 1080);
+    game = new Game(WIDTH, HEIGHT);
     game->Init();
 
     while(!glfwWindowShouldClose(window)) {

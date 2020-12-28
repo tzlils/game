@@ -5,7 +5,7 @@
 #include <GLM/gtc/type_ptr.hpp>
 #include <Rendering/LineRenderer.h>
 #include <Sound/SoundPlayer.h>
-#include <Resources/ResourceManager.h>
+// #include <Resources/ResourceManager.h>
 #include <sstream>
 #include <thread>
 #include <string>
@@ -54,7 +54,7 @@ void Game::Init() {
     /*
         *Loads some textures for drawing layer 1
     */
-    // bg = loadTextureFromFile("assets/background.png", true);
+    bg = loadTextureFromFile("assets/background.png", true);
     grass = loadTextureFromFile("assets/grass.png", true);
     dirt = loadTextureFromFile("assets/dirt.png", true);
     resizeFrames = 0;
@@ -71,12 +71,12 @@ void Game::Init() {
     // objects[objIndex].isStatic = true;
     // objIndex += 1;
 
-    Manager = new ResourceManager();
+    // Manager = new ResourceManager();
 
     // Manager->set<int>("num", 4);
     // printf("num = %i\n", Manager->get<int>("num"));
 
-    Manager->set<Texture2D>("bg", loadTextureFromFile("assets/background.png", true)); 
+    // Manager->set<Texture2D>("bg", loadTextureFromFile("assets/background.png", true)); 
 
 }
 
@@ -163,7 +163,7 @@ void Game::Render() {
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
 
-    renderer->DrawSprite(Manager->get<Texture2D>("bg"), glm::vec2(0, 0), glm::vec2(width, height), 0.0f);
+    renderer->DrawSprite(bg, glm::vec2(0, 0), glm::vec2(width, height), 0.0f);
     // renderer->DrawSprite(dirt, glm::vec2(width/2, height/2), glm::vec2(50, 50), 0.0f);    
     // for (int i = 0; i < objIndex; i++) {
     //     objects[i].Draw(renderer);
@@ -192,7 +192,7 @@ void Game::Render() {
 
     std::stringstream fps;
     fps << "FPS: " << (unsigned int)round(1 / deltaTime);
-    trenderer->RenderText(fps.str(), height, width, 0.5f, glm::vec3(0.0f));
+    trenderer->RenderText(fps.str(), height, width, 2.0f, glm::vec3(0.0f));
 
     // player.Draw(renderer);
     // drawLine(shader, player.position+(player.size*glm::vec2(0.5f, 0.5f)), player.velocity*15.5f);

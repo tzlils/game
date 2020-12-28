@@ -1,4 +1,4 @@
-#include <Resources/ResourceManager.h>
+// #include <Resources/ResourceManager.h>
 #include <map>
 #include <string>
 #include <ostream>
@@ -7,9 +7,9 @@
 #include <typeinfo>
 #include <typeindex>
 
-ResourceManager::ResourceManager() {
+// ResourceManager::ResourceManager() {
 	// sets = std::make_unique<std::unordered_map<std::type_index, std::unique_ptr<IResourceSet>>>();
-}
+// }
 
 // void ResourceManager::registerFont	(std::string name) {
 //     // First clear the previously loaded Characters

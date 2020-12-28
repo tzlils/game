@@ -2,7 +2,7 @@
 #include <Resources/Texture2D.h>
 #include <Rendering/SpriteRenderer.h>
 #include <Rendering/TextRenderer.h>
-#include <Resources/ResourceManager.h>
+// #include <Resources/ResourceManager.h>
 #include <GLFW/glfw3.h>
 #include <Sound/SoundPlayer.h>
 #include <pthread.h>
@@ -37,5 +37,5 @@ class Game {
         SoundPlayer snd;
         pthread_t *sndt;
 
-        ResourceManager* Manager;
+        // ResourceManager* Manager;
 };
