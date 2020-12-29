@@ -3,6 +3,7 @@
 #include <ft2build.h>
 #include <freetype/freetype.h>
 #include <GLM/gtc/matrix_transform.hpp>
+#include <stdexcept>
 
 GLuint VAO, VBO;
 ShaderProgram textShader;
