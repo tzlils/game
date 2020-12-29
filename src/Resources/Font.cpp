@@ -4,10 +4,12 @@
 #include <freetype/freetype.h>
 #include <GLM/gtc/matrix_transform.hpp>
 #include <stdexcept>
+#include <stdio.h>
 
-GLuint VAO, VBO;
-ShaderProgram textShader;
-bool initialized = false;
+GLuint* VAO;
+GLuint * VBO;
+ShaderProgram* textShader;
+int initialized = 0;
 
 namespace Text {
 	Font loadFromFile(const std::string file, unsigned int fontSize) {
@@ -78,28 +80,33 @@ namespace Text {
 
 	void Render(Font font, std::string text, float x, float y, float scale, glm::vec3 color) {
 		if(!initialized) {
-		    glGenVertexArrays(1, &VAO);
-		    glGenBuffers(1, &VBO);
-		    glBindVertexArray(VAO);
-		    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+			VAO = (GLuint*)malloc(sizeof(GLuint));
+			VBO = (GLuint*)malloc(sizeof(GLuint));
+
+		    glGenVertexArrays(1, VAO);
+		    glGenBuffers(1, VBO);
+		    glBindVertexArray(*VAO);
+		    glBindBuffer(GL_ARRAY_BUFFER, *VBO);
 		    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 		    glEnableVertexAttribArray(0);
 		    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
 		    glBindBuffer(GL_ARRAY_BUFFER, 0);
 		    glBindVertexArray(0);
 
-		    textShader = ShaderProgram("assets/text.vs", "assets/text.fs");
-		    textShader.setMat4("projection", glm::ortho(0.0f, static_cast<GLfloat>(500), static_cast<GLfloat>(500), 0.0f));
-		    textShader.setInt("text", 0);
+		    textShader = new ShaderProgram("assets/text.vs", "assets/text.fs");
+		    textShader->setMat4("projection", glm::ortho(0.0f, static_cast<GLfloat>(1920), static_cast<GLfloat>(1080), 0.0f));
+		    textShader->setInt("text", 0);
 
+		    // printf("%i : %i : %p\n", *VAO, *VBO, textShader);
 		    initialized = !initialized;
 		}
 
 		// Activate corresponding render state	
-	    textShader.bind();
-	    textShader.setVec3("textColor", color);
+	    textShader->bind();
+	    textShader->setVec3("textColor", color);
 	    glActiveTexture(GL_TEXTURE0);
-	    glBindVertexArray(VAO);
+	    glBindVertexArray(*VAO);
 
 	    // Iterate through all characters
 	    std::string::const_iterator c;
@@ -125,7 +132,7 @@ namespace Text {
 	        // Render glyph texture over quad
 	        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
 	        // Update content of VBO memory
-	        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	        glBindBuffer(GL_ARRAY_BUFFER, *VBO);
 	        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
 
 	        glBindBuffer(GL_ARRAY_BUFFER, 0);
