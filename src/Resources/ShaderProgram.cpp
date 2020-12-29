@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
 
 ShaderProgram::ShaderProgram() {
     
@@ -22,7 +23,10 @@ ShaderProgram::ShaderProgram(const char* vertPath, const char* fragPath) {
     glGetProgramiv(ID, GL_LINK_STATUS, &success);
     if(!success) {
         glGetProgramInfoLog(ID, 512, NULL, infoLog);
-        printf("Shader Program Link Error: %s\n", infoLog);
+        std::stringstream txt;
+        txt << "ERROR::SHADER: " << infoLog ;
+        throw std::runtime_error( txt.str() );
+        // printf("Shader Program Link Error: %s\n", infoLog);
     }
 
     vertex->dispose();
